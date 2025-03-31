@@ -2,7 +2,8 @@
   <div>
     <NuxtLayout>
       <header>
-        <Navbar />
+        <!-- <Navbar /> -->
+        <Navbar2 />
       </header>
       <NuxtLoadingIndicator />
       <NuxtPage />

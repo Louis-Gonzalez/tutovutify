@@ -1,22 +1,36 @@
 <template>
   <div class="navbar">
-    <NuxtLink class="item-navbar" to="/" exact-active-class="active-link">Home</NuxtLink>
-    <NuxtLink class="item-navbar" to="/about" exact-active-class="active-link">About</NuxtLink>
-    <NuxtLink class="item-navbar" to="/contact" exact-active-class="active-link">Contact</NuxtLink>
+    <NuxtLink
+      v-for="route in routes"
+      :key="route.path"
+      :to="route.path"
+      :class="['item-navbar', { 'active-link': route.path === currentPath }]"
+    >
+      {{ route.name }}
+    </NuxtLink>
   </div>
   <div class="current-page">
-    <p>Vous êtes sur la page : {{ route.path }}</p>
+    <p>Vous êtes sur la page : {{ currentPath }}</p>
   </div>
 </template>
 
 <script setup lang="ts">
 import { useRoute } from 'vue-router';
+import { computed } from 'vue';
+
+const routes = [
+  { path: '/', name: 'Home' },
+  { path: '/about', name: 'About' },
+  { path: '/contact', name: 'Contact' }
+];
+
 const route = useRoute();
+const currentPath = computed(() => route.path);
 </script>
 
 <style>
 .navbar {
-  background-color: yellowgreen;
+  background-color: black;
   display: flex;
   justify-content: flex-start;
   align-items: center;
